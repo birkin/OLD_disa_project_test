@@ -34,17 +34,17 @@ Template [runserver](https://docs.djangoproject.com/en/1.11/ref/django-admin/#ru
         √ update requirements.txt with versions
         √ suggested: `pip install ipython` -- it'll make experimentation lots easier
 
-- log
-    - make log dir, ensuring permissions are correct
-    - touch a project_x.log file, and update 'owner/group', and update group-permissions
-        - note, if setting up on a production-server, make the owner the apache user, and the group the shared-group
-    - add log to system's logrotate
-    - add dir to sublime project
-    - Note: initial run may create an empty logfile with an incorrect owner, causing an error. If this happens, simply update the owner -- the subsequent system's logrotate will ensure the log-file's permissions remain correct.
+√ log
+    √ make log dir, ensuring permissions are correct
+    √ touch a project_x.log file, and update 'owner/group', and update group-permissions
+        √ note, if setting up on a production-server, make the owner the apache user, and the group the shared-group
+    √ add log to system's logrotate
+    √ add dir to sublime project
+    √ Note: initial run may create an empty logfile with an incorrect owner, causing an error. If this happens, simply update the owner -- the subsequent system's logrotate will ensure the log-file's permissions remain correct.
 
 - settings
-    - make settings dir and .sh file
-    - update `env/bin/activate.py` in two areas:
+    √ make settings dir and .sh file
+    √ update `env/bin/activate.py` in two areas:
 
         - add this to the last line of the `deactivate` function...
 
