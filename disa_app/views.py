@@ -14,6 +14,22 @@ from django.shortcuts import get_object_or_404, render
 log = logging.getLogger(__name__)
 
 
+def browse( request ):
+    """ Displays home page. """
+    data = {}
+    if request.GET.get('format', '') == 'json':
+        resp = HttpResponse( json.dumps(data, sort_keys=True, indent=2), content_type='application/javascript; charset=utf-8' )
+    else:
+        resp = render( request, 'disa_app_templates/home.html', data )
+    return resp
+
+
+
+# ===========================
+# for development convenience
+# ===========================
+
+
 def version( request ):
     """ Returns basic data including branch & commit. """
     # log.debug( 'request.__dict__, ```%s```' % pprint.pformat(request.__dict__) )
