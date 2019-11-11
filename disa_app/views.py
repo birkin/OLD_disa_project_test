@@ -24,6 +24,19 @@ def browse( request ):
     return resp
 
 
+def person_index( request ):
+    return HttpResponse( 'coming' )
+
+def login( request ):
+    return HttpResponse( 'coming' )
+
+def editor_index( request ):
+    return HttpResponse( 'coming' )
+
+def logout( request ):
+    return HttpResponse( 'coming' )
+
+
 
 # ===========================
 # for development convenience
