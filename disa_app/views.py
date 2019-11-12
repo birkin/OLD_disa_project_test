@@ -20,7 +20,7 @@ def browse( request ):
     if request.GET.get('format', '') == 'json':
         resp = HttpResponse( json.dumps(data, sort_keys=True, indent=2), content_type='application/javascript; charset=utf-8' )
     else:
-        resp = render( request, 'disa_app_templates/home.html', data )
+        resp = render( request, 'disa_app_templates/browse.html', data )
     return resp
 
 

@@ -1,0 +1,51 @@
+{% extends "disa_app_templates/base.html" %}
+{% load staticfiles %}
+
+
+{% block header %}
+    <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+    <link rel="stylesheet"
+          href="{% static 'lib/slickgrid/css/smoothness/jquery-ui-1.11.3.custom.css' %}"
+          type="text/css"/>
+    <link rel="stylesheet" href="{% static 'lib/slickgrid/slick.grid.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/browse.css' %}" type="text/css"/>
+{% endblock %}
+
+{% block content %}
+	<header>
+		<h1>Browse the database</h1>
+		<hr>
+		<div class="instructions">
+			<p>Find out more about an entry by clicking on the <img src="{% static 'img/info.png' %}"> icon on left-hand side of each entry.</p>
+			<p>Search each entry by sorting the column header. You can search multiple columns at one time. (Please note that you need to delete the original search to reset the form)</p>
+		</div>
+	</header>
+
+	<div id="grid-container">
+		<div id="myGrid" style="width:100%; height:100%;"></div>
+	</div>
+	<div class="info-box">
+		<h3>Acknowledgements</h3>
+
+		<p>DISA has been generously funded and supported by the following entities:</p>
+		<ul>
+			<li>Population Studies and Training Center, Brown University</li>
+			<li>Social Sciences Research Institute, Brown University</li>
+			<li>Office of the Vice President for Research, Brown University</li>
+			<li>Center for Digital Scholarship, Brown University Library</li>
+		</ul>
+	</div>
+
+{% endblock %}
+
+{% block scripts%}
+<script src="{% static 'lib/slickgrid/lib/firebugx.js' %}"></script>
+<script src="{% static 'lib/slickgrid/lib/jquery-1.11.2.min.js' %}"></script>
+<script src="{% static 'lib/slickgrid/lib/jquery-ui-1.11.3.min.js' %}"></script>
+<script src="{% static 'lib/slickgrid/lib/jquery.event.drag-2.3.0.js' %}"></script>
+<script src="{% static 'lib/slickgrid/slick.core.js' %}"></script>
+<script src="{% static 'lib/slickgrid/slick.dataview.js' %}"></script>
+<script src="{% static 'lib/slickgrid/slick.grid.js' %}"></script>
+<script src="{% static 'js/granulated-sugar.js' %}"></script>
+<script src="{% static 'js/browse.js' %}"></script>
+{% endblock %}
