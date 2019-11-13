@@ -3,7 +3,10 @@
 import json, os
 
 
-README_URL = os.environ['DISA__README_URL']
+README_URL = os.environ['DISA_DJ__README_URL']
+
+DENORMALIZED_JSON_URL = os.environ['DISA_DJ__DENORMALIZED_JSON_URL']
+
 
 ## auth
 # SUPER_USERS = json.loads( os.environ['DISA__UPER_USERS_JSON'] )

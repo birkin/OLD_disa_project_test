@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import datetime, json, logging, os, pprint
+
+import requests
 from . import settings_app
 from disa_app.lib import view_info_helper
 # from disa_app.lib.shib_auth import shib_login  # decorator
@@ -14,15 +16,19 @@ from django.shortcuts import get_object_or_404, render
 log = logging.getLogger(__name__)
 
 
+# ===========================
+# main urls
+# ===========================
+
+
 def browse( request ):
     """ Displays home page. """
-    data = {}
+    data = { 'denormalized_json_url': reverse('dnrmlzd_jsn_prx_url_url') }
     if request.GET.get('format', '') == 'json':
         resp = HttpResponse( json.dumps(data, sort_keys=True, indent=2), content_type='application/javascript; charset=utf-8' )
     else:
         resp = render( request, 'disa_app_templates/browse.html', data )
     return resp
-
 
 def person_index( request ):
     return HttpResponse( 'coming' )
@@ -36,6 +42,17 @@ def editor_index( request ):
 def logout( request ):
     return HttpResponse( 'coming' )
 
+
+# ===========================
+# helper urls
+# ===========================
+
+
+def dnrmlzd_jsn_prx_url( request ):
+    """ Allows ajax loading of json from browse() view. """
+    r = requests.get( settings_app.DENORMALIZED_JSON_URL )
+    return HttpResponse( r.content, content_type='application/json; charset=utf-8' )
+    # return HttpResponse( r.content )
 
 
 # ===========================

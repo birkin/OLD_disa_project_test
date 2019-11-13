@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="{% static 'css/browse.css' %}" type="text/css"/>
 {% endblock %}
 
+
 {% block content %}
 	<header>
 		<h1>Browse the database</h1>
 		<hr>
 		<div class="instructions">
-			<p>Find out more about an entry by clicking on the <img src="{% static 'img/info.png' %}"> icon on left-hand side of each entry.</p>
+			<p>Find out more about an entry by clicking on the <img src="{% static 'images/info.png' %}"> icon on left-hand side of each entry.</p>
 			<p>Search each entry by sorting the column header. You can search multiple columns at one time. (Please note that you need to delete the original search to reset the form)</p>
 		</div>
 	</header>
@@ -24,9 +25,9 @@
 	<div id="grid-container">
 		<div id="myGrid" style="width:100%; height:100%;"></div>
 	</div>
+
 	<div class="info-box">
 		<h3>Acknowledgements</h3>
-
 		<p>DISA has been generously funded and supported by the following entities:</p>
 		<ul>
 			<li>Population Studies and Training Center, Brown University</li>
@@ -36,7 +37,10 @@
 		</ul>
 	</div>
 
+    <input type="hidden" id="denormalized_json_url" name="variable" value="{{ denormalized_json_url }}"/>
+
 {% endblock %}
+
 
 {% block scripts%}
 <script src="{% static 'lib/slickgrid/lib/firebugx.js' %}"></script>
