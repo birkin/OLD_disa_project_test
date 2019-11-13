@@ -291,11 +291,7 @@ $.get( dnrmlzd_jsn_url, (some_data, status) => {
     console.log( "data.length..." + raw_data.length );
      for (let i = 0; i < raw_data.length; i++) {
          var rec = raw_data[i];
-         console.log( "rec, " + rec );
-         if( i > 2 ){
-            break;
-         }
-
+         // console.log( "rec, " + rec );
          data.push({
              pic: "",
              persNumber: String(i),
