@@ -166,11 +166,12 @@ let imageFormatter = function(row, cell, value, columnDef, dataContext){
     return "<img src='" + value + "'/>";
 };
 
-let indexFormatter = function(row, cell, value,
-                              columnDef, dataContext) {
-    return ("<img src='static/img/info.png' alt='VALUE' " +
-            "onclick='expandInformation(VALUE)' />")
-           .replace(/VALUE/g, value);
+
+var info_image_url = document.getElementById( "info_image_url" ).value;
+console.log( "info_image_url..." + info_image_url );
+let indexFormatter = function(row, cell, value, columnDef, dataContext) {
+    return ("<img src=" + info_image_url + " alt='VALUE' " +
+            "onclick='expandInformation(VALUE)' />").replace(/VALUE/g, value);
 }
 
 var dataView;
