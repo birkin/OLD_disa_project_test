@@ -23,7 +23,10 @@ log = logging.getLogger(__name__)
 
 def browse( request ):
     """ Displays home page. """
-    data = { 'denormalized_json_url': reverse('dnrmlzd_jsn_prx_url_url') }
+    data = {
+        'denormalized_json_url': reverse('dnrmlzd_jsn_prx_url_url'),
+        'info_image_url': f'{project_settings.STATIC_URL}images/info.png'
+        }
     if request.GET.get('format', '') == 'json':
         resp = HttpResponse( json.dumps(data, sort_keys=True, indent=2), content_type='application/javascript; charset=utf-8' )
     else:
@@ -52,7 +55,6 @@ def dnrmlzd_jsn_prx_url( request ):
     """ Allows ajax loading of json from browse() view. """
     r = requests.get( settings_app.DENORMALIZED_JSON_URL )
     return HttpResponse( r.content, content_type='application/json; charset=utf-8' )
-    # return HttpResponse( r.content )
 
 
 # ===========================
