@@ -23,14 +23,20 @@ log = logging.getLogger(__name__)
 
 def browse( request ):
     """ Displays home page. """
-    data = {
+    context = {
         'denormalized_json_url': reverse('dnrmlzd_jsn_prx_url_url'),
-        'info_image_url': f'{project_settings.STATIC_URL}images/info.png'
-        }
-    if request.GET.get('format', '') == 'json':
-        resp = HttpResponse( json.dumps(data, sort_keys=True, indent=2), content_type='application/javascript; charset=utf-8' )
+        'info_image_url': f'{project_settings.STATIC_URL}images/info.png' }
+    username = None
+    if request.user.is_authenticated:
+        username = request.user.first_name
+        context['logged_in'] = True
     else:
-        resp = render( request, 'disa_app_templates/browse.html', data )
+        context['logged_in'] = False
+    context['username'] = username
+    if request.GET.get('format', '') == 'json':
+        resp = HttpResponse( json.dumps(context, sort_keys=True, indent=2), content_type='application/json; charset=utf-8' )
+    else:
+        resp = render( request, 'disa_app_templates/browse.html', context )
     return resp
 
 def person_index( request ):
