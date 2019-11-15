@@ -227,7 +227,7 @@ class ExtReferences(models.Model):
     national_context = models.ForeignKey(ExtNationalContext, models.DO_NOTHING)
     date = models.DateField(blank=True, null=True)
     transcription = models.TextField(blank=True, null=True)
-    date_detail = models.CharField(max_length=255, blank=True, null=True)
+    # date_detail = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         managed = False

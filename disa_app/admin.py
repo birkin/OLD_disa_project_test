@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from disa_app.models_DISA import ExtPeople
+from disa_app.models_DISA import ExtPeople, ExtReferents
 
 
 # ===========================
@@ -21,6 +21,12 @@ class MultiDBModelAdmin(admin.ModelAdmin):
 
 
 class ExtPeopleAdmin(MultiDBModelAdmin):
-    search_fields = ['first_name', 'last_name']
-    list_display = ['first_name', 'last_name']
+    search_fields = ['id', 'first_name', 'last_name']
+    list_display = ['id', 'first_name', 'last_name', 'comments']
 admin.site.register(ExtPeople, ExtPeopleAdmin)
+
+
+class ExtReferentsAdmin(MultiDBModelAdmin):
+    search_fields = ['id', 'age', 'sex', 'primary_name']
+    list_display = ['id', 'age', 'sex', 'primary_name']
+admin.site.register(ExtReferents, ExtReferentsAdmin)
