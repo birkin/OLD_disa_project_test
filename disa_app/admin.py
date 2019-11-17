@@ -1,7 +1,28 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
+from disa_app.models import Document, DocumentColonyState
 # from disa_app.models_DISA import ExtPeople, ExtReferents
+
+
+class DocumentAdmin( admin.ModelAdmin ):
+    list_display = [ 'default_date', 'display_text' ]
+    list_filter = [
+        'display_text',
+    ]
+    ordering = [ 'display_text' ]
+    save_on_top = True
+admin.site.register( Document, DocumentAdmin )
+
+
+class DocumentColonyStateAdmin( admin.ModelAdmin ):
+    list_display = [
+        'name' ]
+    list_filter = [
+        'name', 'documents' ]
+    ordering = [ 'name' ]
+    save_on_top = True
+admin.site.register( DocumentColonyState, DocumentColonyStateAdmin )
 
 
 # # ===========================
