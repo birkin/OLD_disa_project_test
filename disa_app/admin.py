@@ -5,12 +5,15 @@ from disa_app.models import Document, DocumentColonyState
 # from disa_app.models_DISA import ExtPeople, ExtReferents
 
 
+# class DocumentColonyStateInline( admin.TabularInline ):
+#     model = DocumentColonyState
+
+
 class DocumentAdmin( admin.ModelAdmin ):
     list_display = [ 'default_date', 'display_text' ]
-    list_filter = [
-        'display_text',
-    ]
+    list_filter = [ 'display_text' ]
     ordering = [ 'display_text' ]
+    # inlines = [ DocumentColonyStateInline ]
     save_on_top = True
 admin.site.register( Document, DocumentAdmin )
 

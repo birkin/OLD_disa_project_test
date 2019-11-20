@@ -33,7 +33,7 @@ class DocumentColonyState(models.Model):
     created = models.DateTimeField( auto_now_add=True )
     modified = models.DateTimeField( auto_now=True )
     name = models.CharField( max_length=190 )
-    documents = models.ManyToManyField( Document )
+    documents = models.ManyToManyField( Document, related_name='document_colony_state' )
     def __str__(self):
         return self.name[0:10]
 
@@ -42,7 +42,7 @@ class DocumentRecordType(models.Model):
     created = models.DateTimeField( auto_now_add=True )
     modified = models.DateTimeField( auto_now=True )
     name = models.CharField( max_length=190 )
-    documents = models.ManyToManyField( Document )
+    documents = models.ManyToManyField( Document, related_name='document_record_types' )
     def __str__(self):
         return self.name[0:10]
 
@@ -51,7 +51,7 @@ class DocumentSourceType(models.Model):
     created = models.DateTimeField( auto_now_add=True )
     modified = models.DateTimeField( auto_now=True )
     name = models.CharField( max_length=190 )
-    documents = models.ManyToManyField( Document )
+    documents = models.ManyToManyField( Document, related_name='document_source_types' )
     def __str__(self):
         return self.name[0:10]
 
@@ -60,7 +60,7 @@ class DocumentLocation(models.Model):
     created = models.DateTimeField( auto_now_add=True )
     modified = models.DateTimeField( auto_now=True )
     name = models.CharField( max_length=190 )
-    documents = models.ManyToManyField( Document )
+    documents = models.ForeignKey( Document, default=None )
     def __str__(self):
         return self.name[0:10]
 
@@ -69,6 +69,7 @@ class Citation(models.Model):
     created = models.DateTimeField( auto_now_add=True )
     modified = models.DateTimeField( auto_now=True )
     citation_string = models.CharField( max_length=190 )
+    # document = models.ForeignKey( Document, on_delete=models.CASCADE )
     document = models.ForeignKey( Document, on_delete=models.CASCADE )
 
     def __str__(self):
