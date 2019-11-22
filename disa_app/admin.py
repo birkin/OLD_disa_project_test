@@ -5,27 +5,66 @@ from disa_app.models import Document, DocumentColonyState
 # from disa_app.models_DISA import ExtPeople, ExtReferents
 
 
-# class DocumentColonyStateInline( admin.TabularInline ):
-#     model = DocumentColonyState
+class DocumentColoniesInline( admin.TabularInline ):
+    """ Allows the DocumentAdmin to view/add/edit DocumentColonyState entries,
+        _and_ the DocumentColonyStateAdmin to view/add/edit Document entries.
+        From <https://docs.djangoproject.com/en/1.11/ref/contrib/admin/#working-with-many-to-many-models>:
+        ...The through attribute is a reference to the model that manages the many-to-many relation...
+        """
+    model = DocumentColonyState.documents.through
+    extra = 1
 
 
 class DocumentAdmin( admin.ModelAdmin ):
     list_display = [ 'default_date', 'display_text' ]
     list_filter = [ 'display_text' ]
     ordering = [ 'display_text' ]
-    # inlines = [ DocumentColonyStateInline ]
+    inlines = [ DocumentColoniesInline ]
     save_on_top = True
 admin.site.register( Document, DocumentAdmin )
 
 
 class DocumentColonyStateAdmin( admin.ModelAdmin ):
+    """ From <https://docs.djangoproject.com/en/1.11/ref/contrib/admin/#working-with-many-to-many-models>...
+        The `exclude` disables the default admin-widget that would normally offer the Document view/add/edit capabilities,
+        because the inline feature will be used.
+        """
     list_display = [
         'name' ]
     list_filter = [
         'name', 'documents' ]
     ordering = [ 'name' ]
+    inlines = [ DocumentColoniesInline ]
+    exclude = [ 'documents' ]  #
     save_on_top = True
 admin.site.register( DocumentColonyState, DocumentColonyStateAdmin )
+
+
+
+
+
+
+# from django.contrib import admin
+
+# class MembershipInline(admin.TabularInline):
+#     model = Group.members.through
+
+# class PersonAdmin(admin.ModelAdmin):
+#     inlines = [
+#         MembershipInline,
+#     ]
+
+# class GroupAdmin(admin.ModelAdmin):
+#     inlines = [
+#         MembershipInline,
+#     ]
+#     exclude = ('members',)
+
+
+
+
+
+
 
 
 # # ===========================
