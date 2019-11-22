@@ -59,8 +59,8 @@ class DocumentSourceType(models.Model):
 class DocumentLocation(models.Model):
     created = models.DateTimeField( auto_now_add=True )
     modified = models.DateTimeField( auto_now=True )
-    name = models.CharField( max_length=190 )
-    documents = models.ForeignKey( Document, default=None )
+    name = models.CharField( help_text='city/town', max_length=190 )
+    documents = models.ManyToManyField( Document, default=None )
     def __str__(self):
         return self.name[0:10]
 

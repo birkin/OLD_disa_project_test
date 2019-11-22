@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from disa_app.models import Document, DocumentColonyState, DocumentRecordType, DocumentSourceType
+from disa_app.models import Document, DocumentColonyState, DocumentRecordType, DocumentSourceType, DocumentLocation
 
 
 class DocumentColoniesInline( admin.TabularInline ):
@@ -24,11 +24,16 @@ class DocumentSourceTypeInline( admin.TabularInline ):
     extra = 1
 
 
+class DocumentLocationInline( admin.TabularInline ):
+    model = DocumentLocation.documents.through
+    extra = 1
+
+
 class DocumentAdmin( admin.ModelAdmin ):
     list_display = [ 'default_date', 'display_text' ]
     list_filter = [ 'display_text' ]
     ordering = [ 'display_text' ]
-    inlines = [ DocumentColoniesInline, DocumentRecordTypeInline, DocumentSourceTypeInline ]
+    inlines = [ DocumentColoniesInline, DocumentRecordTypeInline, DocumentSourceTypeInline, DocumentLocationInline ]
     # save_on_top = True
 admin.site.register( Document, DocumentAdmin )
 
@@ -73,6 +78,16 @@ class DocumentSourceTypeAdmin( admin.ModelAdmin ):
 admin.site.register( DocumentSourceType, DocumentSourceTypeAdmin )
 
 
+class DocumentLocationAdmin( admin.ModelAdmin ):
+    list_display = [
+        'name' ]
+    list_filter = [
+        'name', 'documents' ]
+    ordering = [ 'name' ]
+    inlines = [ DocumentLocationInline ]
+    exclude = [ 'documents' ]  #
+    # save_on_top = True
+admin.site.register( DocumentLocation, DocumentLocationAdmin )
 
 
 
