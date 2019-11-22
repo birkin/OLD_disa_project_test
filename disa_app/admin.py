@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from disa_app.models import Document, DocumentColonyState
-# from disa_app.models_DISA import ExtPeople, ExtReferents
+from disa_app.models import Document, DocumentColonyState, DocumentRecordType
 
 
 class DocumentColoniesInline( admin.TabularInline ):
@@ -15,12 +14,17 @@ class DocumentColoniesInline( admin.TabularInline ):
     extra = 1
 
 
+class DocumentRecordTypeInline( admin.TabularInline ):
+    model = DocumentRecordType.documents.through
+    extra = 1
+
+
 class DocumentAdmin( admin.ModelAdmin ):
     list_display = [ 'default_date', 'display_text' ]
     list_filter = [ 'display_text' ]
     ordering = [ 'display_text' ]
-    inlines = [ DocumentColoniesInline ]
-    save_on_top = True
+    inlines = [ DocumentColoniesInline, DocumentRecordTypeInline ]
+    # save_on_top = True
 admin.site.register( Document, DocumentAdmin )
 
 
@@ -36,9 +40,20 @@ class DocumentColonyStateAdmin( admin.ModelAdmin ):
     ordering = [ 'name' ]
     inlines = [ DocumentColoniesInline ]
     exclude = [ 'documents' ]  #
-    save_on_top = True
+    # save_on_top = True
 admin.site.register( DocumentColonyState, DocumentColonyStateAdmin )
 
+
+class DocumentRecordTypeAdmin( admin.ModelAdmin ):
+    list_display = [
+        'name' ]
+    list_filter = [
+        'name', 'documents' ]
+    ordering = [ 'name' ]
+    inlines = [ DocumentRecordTypeInline ]
+    exclude = [ 'documents' ]  #
+    # save_on_top = True
+admin.site.register( DocumentRecordType, DocumentRecordTypeAdmin )
 
 
 
