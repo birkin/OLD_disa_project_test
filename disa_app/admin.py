@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from disa_app.models import Document, DocumentColonyState, DocumentRecordType
+from disa_app.models import Document, DocumentColonyState, DocumentRecordType, DocumentSourceType
 
 
 class DocumentColoniesInline( admin.TabularInline ):
@@ -19,11 +19,16 @@ class DocumentRecordTypeInline( admin.TabularInline ):
     extra = 1
 
 
+class DocumentSourceTypeInline( admin.TabularInline ):
+    model = DocumentSourceType.documents.through
+    extra = 1
+
+
 class DocumentAdmin( admin.ModelAdmin ):
     list_display = [ 'default_date', 'display_text' ]
     list_filter = [ 'display_text' ]
     ordering = [ 'display_text' ]
-    inlines = [ DocumentColoniesInline, DocumentRecordTypeInline ]
+    inlines = [ DocumentColoniesInline, DocumentRecordTypeInline, DocumentSourceTypeInline ]
     # save_on_top = True
 admin.site.register( Document, DocumentAdmin )
 
@@ -56,24 +61,17 @@ class DocumentRecordTypeAdmin( admin.ModelAdmin ):
 admin.site.register( DocumentRecordType, DocumentRecordTypeAdmin )
 
 
+class DocumentSourceTypeAdmin( admin.ModelAdmin ):
+    list_display = [
+        'name' ]
+    list_filter = [
+        'name', 'documents' ]
+    ordering = [ 'name' ]
+    inlines = [ DocumentSourceTypeInline ]
+    exclude = [ 'documents' ]  #
+    # save_on_top = True
+admin.site.register( DocumentSourceType, DocumentSourceTypeAdmin )
 
-
-
-# from django.contrib import admin
-
-# class MembershipInline(admin.TabularInline):
-#     model = Group.members.through
-
-# class PersonAdmin(admin.ModelAdmin):
-#     inlines = [
-#         MembershipInline,
-#     ]
-
-# class GroupAdmin(admin.ModelAdmin):
-#     inlines = [
-#         MembershipInline,
-#     ]
-#     exclude = ('members',)
 
 
 
